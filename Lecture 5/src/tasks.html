@@ -4,24 +4,37 @@
         <title>Tasks</title>
         <script>
             document.addEventListener('DOMContentLoaded', function(){
-                document.querySelector('form').onsubmit = () => {
-                    const task = document.querySelector('#task').value;
-                    console.log(task);
 
-                    //stop form from submitting
-                    return false;
+                //by default the submit button must be disabled
+                document.querySelector('#submit').disabled = true;
+
+                document.querySelector('#task').onkeyup = () => {
+                    document.querySelector('#submit').disabled = false;
                 }
+
+                document.querySelector('form').onsubmit = () => {
+                    const task = document.querySelector('#task').value;                  
+                    const li = document.createElement('li');
+                    li.innerHTML = task;   
+                    document.querySelector('#tasks').append(li);
+                    document.querySelector('#task').value = '';
+                    document.querySelector('#submit').disabled = true
+
+
+                    // Stop form from submitting
+                    return false;
+                };
             });
         </script>
     </head>
     <body>
         <h1>Tasks</h1>
         <ul id="tasks">
-
+            <!-- Tasks will appear here -->
         </ul>
         <form>
             <input id="task" placeholder="New Task" type="text">
-            <input type="submit">
+            <input id="submit" type="submit">
         </form>
     </body>
 </html>
