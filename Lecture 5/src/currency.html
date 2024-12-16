@@ -1,26 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Currency Exchange</title>
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                fetch('https://v6.exchangerate-api.com/v6/eb9cae6d84415359a7ab5446/latest/USD')
-                .then(response => response.json())
-                .then(data => {
-                    if (data && data.conversion_rates && data.conversion_rates.EUR) {
-                        const rate = data.conversion_rates.EUR;
-                        document.querySelector('body').innerHTML = `1 USD is equal to ${rate} EUR.`;
-                    } else {
-                        document.querySelector('body').innerHTML = 'Exchange rate not available.';
-                    }
-                })
-                .catch(error => {
-                    console.error('Error fetching the exchange rate:', error);
-                    document.querySelector('body').innerHTML = 'Failed to fetch exchange rate.';
-                });
-            });
-        </script>
+        <script src="currency.js" defer></script>
     </head>
-    <body>        
-    </body>   
+    <body>
+        <h1>Currency Exchange</h1>
+        <form>
+            <input id="currency" placeholder="Enter Currency (e.g., EUR)" type="text" required>
+            <input type="submit" value="Convert">
+        </form>
+        <div id="result"></div>
+    </body>
 </html>
