@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Currency Exchange</title>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                fetch('https://v6.exchangerate-api.com/v6/eb9cae6d84415359a7ab5446/latest/USD')
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.conversion_rates && data.conversion_rates.EUR) {
+                        const rate = data.conversion_rates.EUR;
+                        document.querySelector('body').innerHTML = `1 USD is equal to ${rate} EUR.`;
+                    } else {
+                        document.querySelector('body').innerHTML = 'Exchange rate not available.';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching the exchange rate:', error);
+                    document.querySelector('body').innerHTML = 'Failed to fetch exchange rate.';
+                });
+            });
+        </script>
+    </head>
+    <body>        
+    </body>   
+</html>
